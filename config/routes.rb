@@ -1,6 +1,10 @@
 EdAlbum::Application.routes.draw do
   
 
+  resources :comments
+
+  resources :photos
+
   resources :albums
 
   resources :users
