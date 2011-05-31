@@ -1,4 +1,5 @@
 class AlbumsController < ApplicationController
+before_filter :require_user
   # GET /albums
   # GET /albums.json
   def index

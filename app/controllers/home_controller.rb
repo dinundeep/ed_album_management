@@ -9,13 +9,11 @@ class HomeController < ApplicationController
   def admin
 
   end
-
   def check_login
     login = params[:login]
     #pass = params[:password]
-    pass = Digest::MD5.hexdigest(params[:password])
+    pass = get_encryp_pass(params[:password])
     user = User.find(:first,:conditions=>[" login_name = ? and login_password = ? ",login,pass] )
-debugger
     if user 
       if user.login_role =="admin" then
 	  session[:current_user] = user.id
@@ -34,16 +32,8 @@ debugger
       redirect_to :action => 'login'
     end
   end
+  
 
-   def modify_password
-       c_password = get_encryp_pass(params[:current_password])
-       n_password = get_encryp_pass(params[:new_password])
-       @user = User.find(:first,:conditions=>[" login_password = ? ",c_password])
-       if @user then
-        @user.login_password = n_password
-        @user.save
-        redirect_to :action => 'admin'
-      end
-    end 
+   
    
 end
