@@ -2,40 +2,51 @@
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+       <% @user.errors.full_messages.each do |msg| %>
+         <li><%= msg %></li>
+       <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :login_name %><br />
-    <%= f.text_field :login_name %>
-  </div>
-  <div class="field">
-    <%= f.label :login_pass %><br />
-    <%= f.text_field :login_pass %>
-  </div>
-  <div class="field">
-    <%= f.label :login_role %><br />
-    <%= f.text_field :login_role %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email_id %><br />
-    <%= f.text_field :email_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <center>
+    <table>
+      <tr>
+         <div class="field">
+           <td><b><%= f.label :login_name %></b></td><td><%= f.text_field :login_name %></td>
+         </div>
+      </tr>
+      <tr>
+         <div class="field">
+           <td><b><%= f.label :login_password %></b></td><td><%= f.text_field :login_password %></td>
+         </div>
+      </tr>
+      <tr>
+         <div class="field">
+           <td><b><%= f.label :first_name %></b></td></td><td><%= f.text_field :first_name %></td>
+         </div>
+      </tr>
+      <tr>
+        <div class="field">
+           <td><b><%= f.label :last_name %></b></td><td><%= f.text_field :last_name %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="field">
+           <td><b><%= f.label :login_role %></b></td><td><%= f.text_field :login_role %></td>
+        </div>
+        </tr>
+      <tr>
+        <div class="field">
+           <td><b><%= f.label :email_id %></b></td><td><%= f.text_field :email_id %></td>
+        </div>
+      </tr>
+      <tr><td></td><td></td></tr>
+      <tr>
+        <div class="actions">
+          <td><b><%= f.submit %></b></td><td></td>
+        </div>
+      </tr>
+  </table>
+ </center>
 <% end %>

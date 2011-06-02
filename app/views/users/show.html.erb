@@ -1,35 +1,24 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Login name:</b>
-  <%= @user.login_name %>
-</p>
-
-<p>
-  <b>Login pass:</b>
-  <%= @user.login_pass %>
-</p>
-
-<p>
-  <b>Login role:</b>
-  <%= @user.login_role %>
-</p>
-
-<p>
-  <b>First name:</b>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<marquee><font color="red"><h2>EMPLOYEE INFORMATION</h2></font></marquee>
+<center>
+   <table border="2">
+     <tr>
+         <td><b>Login name:</b></td><td><%= @user.login_name %></td>
+     </tr>
+     <tr>
+         <td><b>Login password:</b></td><td><%= @user.login_password %></td>
+     </tr>
+     <tr>
+         <td><b>First name:</b></td><td><%= @user.first_name %></td>
+     </tr>
+     <tr>
+         <td><b>Last name:</b></td><td><%= @user.last_name %></td>
+     </tr>
+         <td><b>Login role:</b></td><td><%= @user.login_role %></td>
+     </tr>
+     <tr>
+        <td><b>Email:</b></td><td><%= @user.email_id %></td>
+    </table>
+</center>
+<br><br><br><br>
 <%= link_to 'Back', users_path %>

@@ -15,11 +15,11 @@ class HomeController < ApplicationController
     if @user 
       if @user.login_role =="admin" then
 	  session[:current_user] = @user
-	  flash[:note]="Welcome admin "+@user.login_name
+	  flash[:note]="Welcome admin " + @user.login_name
 	  redirect_to :controller =>'users',:action => 'admin'
       elsif(@user.login_role=="employee") then
 	  session[:current_user] = user.id
-	  flash[:note]="Welcome employee "+@user.login_name
+	  flash[:note]="Welcome employee " + @user.login_name
 	  redirect_to :controller =>'users', :action => 'employee'
 	  #elsif(user.login_role=="") then
 	  #      redirect_to :action => 'login'
