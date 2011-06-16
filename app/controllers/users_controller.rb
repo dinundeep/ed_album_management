@@ -4,12 +4,20 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
-  layout 'admin_layout'
+  layout 'admin_layout' , :except => [:employee , :change_password]
   def admin
    
   end
-
-
+  def employee
+   render :layout => "employee_layout"
+  end
+  def change_password
+     if current_user.login_role == 'employee'
+       render :layout => "employee_layout"
+     else
+       render :layout => "admin_layout"
+     end
+  end
   def index
    @users = User.all
     respond_to do |format|
@@ -92,8 +100,11 @@ class UsersController < ApplicationController
      if @user then
        @user.login_password = new_password
        @user.save
-     redirect_to :action => 'admin'
-     end
-    end 
+       redirect_to :action => 'admin'
+     else 
+        flash[:notice] = "You have entered wrong current password. Please try again"
+        redirect_to :action => 'change_password'
+      end
+   end 
  
 end

@@ -1,7 +1,9 @@
 class AlbumsController < ApplicationController
-before_filter :require_user
+  before_filter :require_user
+
   # GET /albums
   # GET /albums.json
+  layout 'employee_layout'
   def index
     @albums = Album.all
       respond_to do |format|
@@ -24,7 +26,6 @@ before_filter :require_user
   # GET /albums/new.json
   def new
     @album = Album.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @album }
@@ -40,6 +41,7 @@ before_filter :require_user
   # POST /albums.json
   def create
     @album = Album.new(params[:album])
+    @album.user_id = current_user.id
 
     respond_to do |format|
       if @album.save
@@ -78,5 +80,17 @@ before_filter :require_user
       format.html { redirect_to albums_url }
       format.json { head :ok }
     end
+  end
+
+  def my_albums
+    #@albums = Album.find(:all,:conditions=>[" user_id = ? " , current_user.id] )
+    @albums = current_user.albums
+    render :template => 'albums/index'
+  end
+  def all_albums
+    #@albums = Album.find(:all,:conditions=>[" user_id = ? " , current_user.id] )
+    #@albums = current_user.albums
+    @albums = Album.all
+    render :template => 'albums/all_albums'
   end
 end

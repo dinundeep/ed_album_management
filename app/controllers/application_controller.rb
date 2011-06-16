@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   def current_user
+    #@current_user ||= User.find(session[:current_user].to_i)
     session[:current_user]
   end
 
@@ -16,6 +17,5 @@ private
   def require_user
     redirect_to login_home_index_path and return if session[:current_user].blank?
   end
-
 end
 

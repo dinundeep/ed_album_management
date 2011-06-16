@@ -2,8 +2,13 @@ class CommentsController < ApplicationController
 
   # GET /comments
   # GET /comments.json
+  layout 'employee_layout'
   def index
     @comments = Comment.all
+#     @photo = Photo.find(params[:photo_id])
+#     @comments = @photo.comments
+    #@photos = Album.photos
+#     @comments = Comment.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +20,9 @@ class CommentsController < ApplicationController
   # GET /comments/1.json
   def show
     @comment = Comment.find(params[:id])
+    @photo = Photo.find(params[:photo_id])
+#     @comment = @photo.comments
+    
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,8 +33,15 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.json
   def new
-    @comment = Comment.new
-
+#     @user = User.find(params[:current_user.id])
+       @album = Album.find(params[:album_id])
+      @photo = Photo.find(params[:photo_id])
+#       @user = current_user
+      #@photos = @album.photos
+#     @comment = @photo.Comment.new
+  #    @comment = Comment.new()
+     @comment = @photo.comments.build()
+     # @comment = @photo.Comment.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @comment }
@@ -35,17 +50,28 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @photo = Photo.find(params[:photo_id])
+    @album = Album.find(params[:album_id])
     @comment = Comment.find(params[:id])
+    
   end
 
   # POST /comments
   # POST /comments.json
   def create
+  
+#   @comment.user_id = current_user.id
+#   @comment.photo_id = @photo.id
+     @photo = Photo.find(params[:photo_id])
+     @album = Album.find(params[:album_id])
+#     @user = @photo.album_id
     @comment = Comment.new(params[:comment])
-
+    @comment.user_id = current_user.id
+    @comment.photo_id = params[:photo_id]
+#     @comment = @photo.comments.build(params[:comment])
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to album_photo_comment_path(@album,@photo,@comment), notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }
@@ -57,11 +83,13 @@ class CommentsController < ApplicationController
   # PUT /comments/1
   # PUT /comments/1.json
   def update
+    @photo = Photo.find(params[:photo_id])
+    @album = Album.find(params[:album_id])
     @comment = Comment.find(params[:id])
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to album_photo_comment_path, notice: 'Comment was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -77,7 +105,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to comments_url }
+      format.html { redirect_to album_photo_comments_path }
       format.json { head :ok }
     end
   end
