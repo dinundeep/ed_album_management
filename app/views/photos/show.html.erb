@@ -2,9 +2,9 @@
 
 <p>
   <b>Album:</b>
-  <%= @photo.album %>
+    <%= @photo.album_id %>
 </p>
 
+    <%= image_tag @photo.image.url(:medium) %>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<%= link_to 'Back', all_albums_albums_path %>
