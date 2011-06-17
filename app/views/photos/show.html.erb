@@ -1,10 +1,7 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Album:</b>
-    <%= @photo.album_id %>
-</p>
-
-    <%= image_tag @photo.image.url(:medium) %>
-
+  <%= image_tag @photo.image.url(:original) %>
+  <% @comments.each do |comment| %>
+      <h3><%= comment.user.name %> : <%= comment.comment_name %></h3>
+  <% end %>
+<%= link_to 'New comment', new_album_photo_comment_path(@photo.album,@photo) %>
 <%= link_to 'Back', all_albums_albums_path %>

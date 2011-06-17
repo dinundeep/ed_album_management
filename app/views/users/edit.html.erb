@@ -1,9 +1,4 @@
-
-<marquee>
-  <font color="red">
-    <center><h2>EDITING USER</h2></center>
-  </font>
-</marquee>
+<%= render :partial =>'home/marquee',:locals=>{:message =>'UPDATE EMPLOYEE INFORMATION'} %>
 <%= render 'form' %>
-<%= link_to 'Show', @user %> |
+<%= link_to 'Show', @user %>
 <%= link_to 'Back', users_path %>

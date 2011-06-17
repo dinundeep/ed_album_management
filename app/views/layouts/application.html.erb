@@ -5,88 +5,12 @@
      <%= javascript_include_tag "application" %>
      <%= javascript_include_tag "prototype" %>
      <%= javascript_include_tag "rails" %>
+     <%= javascript_include_tag "login_page" %>
+     <%= stylesheet_link_tag "scaffold" %>
+     <%= stylesheet_link_tag "home" %>
      <%= csrf_meta_tags %>
 
-     <SCRIPT type="text/javascript">
-
-     function validateForm()
-      {
-       var login_name=document.forms["login_form"]["login"].value
-       var login_password=document.forms["login_form"]["password"].value
-        if (login_name==null || login_name=="" )
-         {
-            alert("Login name must be filled out");
-            return false;
-         }
-        if(login_password==null || login_password=="")
-        {
-          alert("Login password must be filled out");
-          return false;
-        }
-
-      }
-
-     </SCRIPT>
-
-     <style type="text/css">
-        h1 
-          {
-           background-color:#6495ed;
-          }
-        h6.main_link 
-           {
-            background-color:#98dabc;
-            text-align:right;
-            top:120px;
-            right:5px;
-           }
-        h6.extra_link
-          {
-            background-color:#98dabc;
-            text-align:right;
-            bottom:-10px;
-            right:5px;
-          }
-        body 
-          {
-           background-image: url('/images/image1.gif');
-          }
-        a
-         {
-         letter-spacing:2px;
-         word-spacing:30px;
-         }
-         a:link {color:#FF0000;} 
-         a:visited {color:#00008B;}
-         a:hover {color:#FF00FF;}
-         a:active {color:#0000FF;}
-        a
-        {
-         border: 1px solid #939393;
-         margin: 15px;
-         padding: 8px;
-        }
-        .header
-         {
-          position: relative; 
-          top: 0px; 
-          left: 0x;
-           height : 30%; 
-          width: 100%; 
-         }
-        .middile
-         {
-          position: relative; 
-          width: 100%; 
-         }
-        .footer
-         {
-          position: relative; 
-          width: 100%;
-         }
-
-   </style>
-  </head>
+   </head>
    <div class="header">
     <body>
       <center>

@@ -1,5 +1,5 @@
 
-<marquee><font color="red"><h2>EMPLOYEE'S INFORMATION</h2></font></marquee>
+<%= render :partial =>'home/marquee',:locals=>{:message =>'EMPLOYEE INFORMATION'} %>
 <center>
  <table border="2">
   <tr>
@@ -29,5 +29,4 @@
  </table>
 </center>
 <br />
-
-<a href="/home/admin">Back</a>
+<%= link_to 'Back', :controller =>'users',:action => 'admin' %>

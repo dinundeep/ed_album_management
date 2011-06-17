@@ -7,14 +7,13 @@
 
 <p>
   <b>Photo:</b>
-  <%= @comment.photo %>
+  <%= @comment.photo_id %>
 </p>
 
 <p>
   <b>User:</b>
-  <%= @comment.user %>
+  <%= @comment.user_id %>
 </p>
 
+<%= link_to 'Back', album_photo_comments_path %>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
