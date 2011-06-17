@@ -2,6 +2,7 @@
 <div class="row">
  <% @albums.each do |album| %>
     <div class="col1">
+       <%= album.photos.last %>
        <%= link_to image_tag("/images/admin3.jpeg" , :height => "150" , :width => "200" , :title => "Show photos") , album_photos_path(album)%>
        <div class="link">
           <%= link_to image_tag("/images/show_img.jpeg" ,:height => "20" , :width => "20" , :title => "show album" ), album %>

@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
-  <%= image_tag @photo.image.url(:original) %>
-  <% @comments.each do |comment| %>
-      <h3><%= comment.user.name %> : <%= comment.comment_name %></h3>
-  <% end %>
-<%= link_to 'New comment', new_album_photo_comment_path(@photo.album,@photo) %>
-<%= link_to 'Back', all_albums_albums_path %>
+    <div class="show_photo"><%= image_tag @photo.image.url(:original) %></div>
+    <div id="all_comment_content" class="all_comments">
+      <% @comments.each do |comment| %>
+	  <h5><font color="blue"><%= comment.user.name %></font> : <%= comment.comment_name %></h5>
+      <% end %>
+    </div>
+    <div class="comment"><TEXTAREA id="photo_comment_text" name="comment_name" rows="2" cols="50"></TEXTAREA><input type="button" name="comment" value="comment" onclick="post_comment('<%= album_photo_comments_path(@photo.album,@photo) %>')"></div>
+
+<br><br><br>
+<%= link_to 'New comment', album_photo_path %>
+<%= link_to 'Back', album_photos_path %>

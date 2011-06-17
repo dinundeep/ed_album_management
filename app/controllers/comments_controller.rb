@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
   # GET /comments/new.json
   def new
 #     @user = User.find(params[:current_user.id])
-       @album = Album.find(params[:album_id])
+      @album = Album.find(params[:album_id])
       @photo = Photo.find(params[:photo_id])
 #       @user = current_user
       #@photos = @album.photos
@@ -59,23 +59,14 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-  
-#   @comment.user_id = current_user.id
-#   @comment.photo_id = @photo.id
-     @photo = Photo.find(params[:photo_id])
-     @album = Album.find(params[:album_id])
-#     @user = @photo.album_id
-    @comment = Comment.new(params[:comment])
+    @photo = Photo.find(params[:photo_id])
+    @comment = @photo.comments.build(:comment_name => params[:comment_name])
     @comment.user_id = current_user.id
-    @comment.photo_id = params[:photo_id]
-#     @comment = @photo.comments.build(params[:comment])
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to album_photo_comment_path(@album,@photo,@comment), notice: 'Comment was successfully created.' }
-        format.json { render json: @comment, status: :created, location: @comment }
+        format.html { render :partial => "photo_comment" }
       else
-        format.html { render action: "new" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.html { render :text => "error" }
       end
     end
   end
