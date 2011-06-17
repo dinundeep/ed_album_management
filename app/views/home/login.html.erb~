@@ -1,11 +1,17 @@
-
-<center><font color="blue"><h1>LOGIN PAGE</h1></font></center>
-
-
-<form method="post" action="/home/check_login">
-  <table>
-  <tr><td>LOGIN NAME</td><td><input type="text" name="login" /></td></tr>
-  <tr><td>LOGIN PASSWORD</td><td><input type="password" name="password" /></td></tr><tr></tr><tr></tr>
-  <tr><td></td><td><b><input type="submit" value="Login" /></b></td></tr>
-  </table>
+<%= render :partial =>'home/marquee',:locals=>{:message =>'LOGIN PAGE'} %>
+<p id="notice"><%= notice %></p>
+<form method="post" action="/home/check_login" name="login_form" onsubmit="return validateForm()">
+    <table>
+      <tr>
+	  <td><b>LOGIN NAME</b></td><td><input id="login" type="text" name="login" /></td>
+      </tr>
+      <tr>
+	  <td><b>LOGIN PASSWORD</b></td><td><input id="password" type="password" name="password" /></td>
+      </tr>
+      <tr>
+	  <td></td><td><b><input type="submit" value="Login" /></b></td>
+      </tr>
+  </table><br>
 </form>
+
+

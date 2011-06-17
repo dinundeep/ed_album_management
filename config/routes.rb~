@@ -1,22 +1,42 @@
 EdAlbum::Application.routes.draw do
   
+  resources :comments do
+  end
+  resources :albums do
+    resources :photos do
+    collection do
+      get 'all_album_photos'
+    end
+    member do
+      get  'download'
+    end
+    end
+   collection do
+     get 'my_albums'
+     get 'add_photo'
+     get 'all_albums'
+   end
+  end
+  resources :users do
+    collection do
+     post 'modify_password'
+     get 'admin'
+     get 'employee'
+     get 'change_password'
+   end
+  end
 
-  resources :albums
-
-  resources :users
   resources :home do
     collection do 
       post 'check_login'
+      delete 'logout'
+      get 'login'
+      get 'home_page'
     end
   end
-  root :to => 'home#login'
-match "/invalid" => "home#invalid"
-match "/valid" => "home#valid"
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
+  root :to => 'home#home_page'
+
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:

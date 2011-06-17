@@ -1,2 +1,9 @@
 class Album < ActiveRecord::Base
+  belongs_to :user
+  has_many :photos ,:dependent => :destroy
+
+  def set_default_thumbnail
+    self.thumbnail_id = self.photos.last
+    self.save
+  end
 end

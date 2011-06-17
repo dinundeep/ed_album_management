@@ -6,13 +6,15 @@ gem 'rails', '3.1.0.rc1'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql'
-
+gem 'ezcrypto'
 # Asset template engines
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
+gem "paperclip", "~> 2.3"
 
 gem 'jquery-rails'
+gem 'ruby-debug19'
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -1,31 +1,33 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= render :partial =>'home/marquee',:locals=>{:message =>'EMPLOYEE INFORMATION'} %>
+<center>
+ <table border="2">
+  <tr>
+    <th>Login name</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Login role</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+   <% @users.each do |user| %>
+
+   <tr>
+    <td><%= user.login_name %></td>
+    <td><%= user.first_name %></td>
+    <td><%= user.last_name %></td>
+    <td><%= user.login_role %></td>
+    <td><%= user.email_id %></td>
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+   </tr>
   <% end %>
-  <table>
-
-    <tr><td><%= f.label :login_name %></td><td><%= f.text_field :login_name %></td></tr>
-    <tr><td><%= f.label :login_pass %></td><td><%= f.text_field :login_pass %></td></tr>
-    <tr><td><%= f.submit %></td></tr>
- 
-  </table>
-
-<% end %>
-
-
-
-
-
-
-
-
-
-
+ </table>
+</center>
+<br />
+<%= link_to 'Back', :controller =>'users',:action => 'admin' %>
+<a href="/home/admin">Back</a>
