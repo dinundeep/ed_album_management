@@ -5,11 +5,6 @@ class CommentsController < ApplicationController
   layout 'employee_layout'
   def index
     @comments = Comment.all
-#     @photo = Photo.find(params[:photo_id])
-#     @comments = @photo.comments
-    #@photos = Album.photos
-#     @comments = Comment.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @comments }
@@ -33,16 +28,11 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.json
   def new
-#     @user = User.find(params[:current_user.id])
       @album = Album.find(params[:album_id])
-      @photo = Photo.find(params[:photo_id])
-#       @user = current_user
-      #@photos = @album.photos
-#     @comment = @photo.Comment.new
-  #    @comment = Comment.new()
-     @comment = @photo.comments.build()
-     # @comment = @photo.Comment.new
-    respond_to do |format|
+#       @photo = Photo.find(params[:photo_id])
+      @photo = @album.photos
+      @comment = @photo.comments.build()
+      respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @comment }
     end
@@ -50,8 +40,8 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
-    @photo = Photo.find(params[:photo_id])
     @album = Album.find(params[:album_id])
+    @photo = @album.photos
     @comment = Comment.find(params[:id])
     
   end
@@ -74,8 +64,8 @@ class CommentsController < ApplicationController
   # PUT /comments/1
   # PUT /comments/1.json
   def update
-    @photo = Photo.find(params[:photo_id])
     @album = Album.find(params[:album_id])
+    @photo = @album.photos
     @comment = Comment.find(params[:id])
 
     respond_to do |format|

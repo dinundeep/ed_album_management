@@ -5,8 +5,7 @@
 	  <h5><font color="blue"><%= comment.user.name %></font> : <%= comment.comment_name %></h5>
       <% end %>
     </div>
-    <div class="comment"><TEXTAREA id="photo_comment_text" name="comment_name" rows="2" cols="50"></TEXTAREA><input type="button" name="comment" value="comment" onclick="post_comment('<%= album_photo_comments_path(@photo.album,@photo) %>')"></div>
+    <div class="comment" id="show"><TEXTAREA id="photo_comment_text" name="comment_name" rows="2" cols="50"></TEXTAREA><input type="button" name="comment" value="comment" onclick="post_comment('<%= album_photo_comments_path(@photo.album,@photo) %>','show')"></div>
 
 <br><br><br>
-<%= link_to 'New comment', album_photo_path %>
-<%= link_to 'Back', album_photos_path %>
+<a href="#" onclick="show_comment('show');">New comment</a>  | <%= link_to 'Back', album_photos_path %>

@@ -5,11 +5,7 @@ class PhotosController < ApplicationController
   layout 'employee_layout'
   def index
     @album = Album.find(params[:album_id])
-    #@photos = Album.photos
     @photos = @album.photos
-    #@photos = Album.photos
-    #@album = Album.find(params[:album_id])
-    #@photo = @album.photos
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @photos }
@@ -33,10 +29,6 @@ class PhotosController < ApplicationController
   # GET /photos/new.json
   def new
     @album = current_user.albums.find(params[:album_id])
-    #unless @album
-     # flash[:notice] = "You can not add photos to this album" 
-     # redirect_to my_albums_albums_path and return
-    #end
     @photo = @album.photos.build()
     respond_to do |format|
       format.html # new.html.erb
@@ -49,8 +41,6 @@ class PhotosController < ApplicationController
   def edit
     @photo = Photo.find(params[:id])
     @album = @photo.album
-    #@album = Album.find(params[:album_id])
-    #@photo = @album.photos.build(params[:photo])
   end
 
   # POST /photos
@@ -72,7 +62,6 @@ class PhotosController < ApplicationController
   # PUT /photos/1
   # PUT /photos/1.json
   def update
-    #@photo = Photo.find(params[:id])
     @album = Album.find(params[:album_id])
     @photo = @album.photos.build(params[:photo])
     respond_to do |format|
@@ -110,7 +99,6 @@ class PhotosController < ApplicationController
   def all_album_photos
     @album = Album.find(params[:album_id])
     @photos = @album.photos
-    #render :template => 'photos/all_album_photos'
     render :template => 'photos/index'
   end
 end
