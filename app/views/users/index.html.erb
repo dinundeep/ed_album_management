@@ -1,4 +1,3 @@
-
 <%= render :partial =>'home/marquee',:locals=>{:message =>'EMPLOYEE INFORMATION'} %>
 <center>
  <table border="2">
@@ -14,7 +13,6 @@
   </tr>
 
    <% @users.each do |user| %>
-
    <tr>
     <td><%= user.login_name %></td>
     <td><%= user.first_name %></td>
@@ -28,5 +26,6 @@
   <% end %>
  </table>
 </center>
-<br />
+<br/>
+<%= will_paginate @users %>
 <%= link_to 'Back', :controller =>'users',:action => 'admin' %>

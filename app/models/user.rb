@@ -1,4 +1,11 @@
+
 class User < ActiveRecord::Base
+
+  cattr_reader :page
+  @@page = 5
+ 
+
+
 
   has_many :albums
   has_many :comments

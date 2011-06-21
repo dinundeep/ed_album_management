@@ -1,10 +1,15 @@
 <center> 
 <div class="row">
+ <center><h2><%= current_user.name.upcase %> ALBUMS</h2></center>
  <% @albums.each do |album| %>
     <div class="col1">
-       <%= album.photos.last %>
-       <%= link_to image_tag("/images/admin3.jpeg" , :height => "150" , :width => "200" , :title => "Show photos") , album_photos_path(album)%>
-       <div class="link">
+          <div class="album_info"><font color="blue">album <%= album.album_name%></font></div>
+	  <% if album.cover_photo %>
+	    <%= link_to image_tag( album.cover_photo.image.url(:original) , :height => "200" , :width => "200" , :title => "Show photos") , album_photos_path(album)  %>
+	  <% else %>
+	    <%= link_to image_tag( '/images/admin.jpeg' , :height => "200" , :width => "200" , :title => "Show photos") , album_photos_path(album)  %>
+	  <% end %>
+          <div class="link">
           <%= link_to image_tag("/images/show_img.jpeg" ,:height => "20" , :width => "20" , :title => "show album" ), album %>
           <%= link_to image_tag("/images/edit_img.jpeg" ,:height => "20" , :width => "20" , :title => "Edit album"), edit_album_path(album) %>
           <%= link_to image_tag("/images/add_img.jpeg" ,:height => "20" , :width => "20" , :title => "Add photo"), new_album_photo_path(album)%>

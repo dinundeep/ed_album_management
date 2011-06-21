@@ -101,4 +101,12 @@ class PhotosController < ApplicationController
     @photos = @album.photos
     render :template => 'photos/index'
   end
+
+  def set_cover_photo
+    @photo = Photo.find(params[:id])
+     @album = @photo.album
+     @album.cover_photo_id = @photo.id
+      @album.save
+    redirect_to my_albums_albums_path
+ end
 end

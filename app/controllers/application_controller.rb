@@ -17,5 +17,9 @@ private
   def require_user
     redirect_to login_home_index_path and return if session[:current_user].blank?
   end
+
+  def set_album_cover_photo(photo)
+   
+  end
 end
 

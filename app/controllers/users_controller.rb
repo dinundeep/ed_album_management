@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_filter :require_user
   # GET /users
   # GET /users.json
-
   layout 'admin_layout' , :except => [:employee , :change_password]
   def admin
    
@@ -20,6 +19,11 @@ class UsersController < ApplicationController
   end
   def index
    @users = User.all
+   @users = @users.paginate(:page => params[:page], :per_page => 10)
+   #@user = User.all.paginate :page => params[:page], :order => 'created_at DESC'
+   #@users = User.paginate( :page => 1, :per_page => 2)
+   #@users = User.paginate(@users.id, :page => params[:page], :order => 'updated_at DESC')
+   #@users = User.paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
@@ -106,5 +110,6 @@ class UsersController < ApplicationController
         redirect_to :action => 'change_password'
       end
    end 
+
  
 end

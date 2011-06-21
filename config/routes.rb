@@ -8,6 +8,7 @@ EdAlbum::Application.routes.draw do
     end
     member do
       get  'download'
+      get 'set_cover_photo'
     end
     end
    collection do

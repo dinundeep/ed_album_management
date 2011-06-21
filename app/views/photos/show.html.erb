@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+    <center><font color="blue"><h2><%= @photo.image_file_name %> from <%= (@photo.album).album_name%> album</h2></font></center><br>
     <div class="show_photo"><%= image_tag @photo.image.url(:original) %></div>
     <div id="all_comment_content" class="all_comments">
       <% @comments.each do |comment| %>

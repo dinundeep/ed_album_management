@@ -1,14 +1,14 @@
 EdAlbum::Application.routes.draw do
-  
-  resources :comments do
-  end
+
   resources :albums do
     resources :photos do
+      resources :comments
     collection do
       get 'all_album_photos'
     end
     member do
       get  'download'
+      post 'set_cover_photo'
     end
     end
    collection do
