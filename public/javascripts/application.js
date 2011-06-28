@@ -6,16 +6,13 @@ function post_comment(url,show)
     alert("Comment should not blank");
     return false;
   }
-   var state= document.getElementById(show).style.display;
-
-           
-   
-  
+  var state= document.getElementById(show).style.display;
   new Ajax.Request(url,
     { 
       method:'post' ,
       parameters: { comment_name: comment_message},
-      onSuccess: function(response) {
+      onSuccess: function(response) 
+      {
 	var last_comment = response.responseText ;
         var old_comments = $("all_comment_content").innerHTML;
         $('photo_comment_text').value = '';
@@ -30,13 +27,23 @@ function post_comment(url,show)
     }
 }
 function show_comment(show)
-        {
-    var state= document.getElementById(show).style.display;
-
-       document.getElementById(show).style.display = 'block';    
-   
+{
+  var state= document.getElementById(show).style.display;
+  document.getElementById(show).style.display = 'block';    
   if (state=='block')
-    {
-       document.getElementById(show).style.display = 'none'; 
-    }
+  {
+    document.getElementById(show).style.display = 'none'; 
+  }
 }
+      var upload_number = 2;
+      function addFileInput() 
+       {
+ 	var d = document.createElement("div");
+ 	var file = document.createElement("input");
+ 	file.setAttribute("type", "file");
+ 	file.setAttribute("name", "photo[image][]");
+ 	d.appendChild(file);
+ 	document.getElementById("moreUploads").appendChild(d);
+ 	upload_number++;
+       }
+

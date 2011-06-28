@@ -1,15 +1,19 @@
 require 'digest/sha2'
+require 'will_paginate'
 class UsersController < ApplicationController
   before_filter :require_user
+  layout :set_layout
   # GET /users
   # GET /users.json
-  layout 'admin_layout' , :except => [:employee , :change_password]
+#   layout 'admin_layout' , :except => [:employee , :change_password]
   def admin
-   
+
   end
+
   def employee
    render :layout => "employee_layout"
   end
+
   def change_password
      if current_user.login_role == 'employee'
        render :layout => "employee_layout"
@@ -17,13 +21,10 @@ class UsersController < ApplicationController
        render :layout => "admin_layout"
      end
   end
+
   def index
    @users = User.all
    @users = @users.paginate(:page => params[:page], :per_page => 10)
-   #@user = User.all.paginate :page => params[:page], :order => 'created_at DESC'
-   #@users = User.paginate( :page => 1, :per_page => 2)
-   #@users = User.paginate(@users.id, :page => params[:page], :order => 'updated_at DESC')
-   #@users = User.paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
@@ -90,7 +91,6 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :ok }
@@ -101,15 +101,17 @@ class UsersController < ApplicationController
     current_password = get_encryp_pass(params[:current_password])
     new_password = get_encryp_pass(params[:new_password])
     @user = User.find(:first,:conditions=>[" login_password = ? and id = ? ",current_password, current_user.id])
-     if @user then
-       @user.login_password = new_password
-       @user.save
-       redirect_to :action => 'admin'
-     else 
+      if @user then
+        @user.login_password = new_password
+        @user.save
+        if current_user.login_role == 'Admin'
+           redirect_to :action => 'admin'
+        else
+           redirect_to :action => 'employee'
+        end
+      else 
         flash[:notice] = "You have entered wrong current password. Please try again"
         redirect_to :action => 'change_password'
       end
-   end 
-
- 
+   end  
 end

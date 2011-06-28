@@ -1,9 +1,9 @@
 class AlbumsController < ApplicationController
   before_filter :require_user
-
+  layout :set_layout
   # GET /albums
   # GET /albums.json
-  layout 'employee_layout'
+#    layout 'employee_layout'
   def index
     @albums = Album.all
       respond_to do |format|
@@ -77,7 +77,7 @@ class AlbumsController < ApplicationController
     @album.destroy
 
     respond_to do |format|
-      format.html { redirect_to albums_url }
+      format.html { redirect_to my_albums_albums_url }
       format.json { head :ok }
     end
   end

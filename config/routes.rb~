@@ -8,7 +8,7 @@ EdAlbum::Application.routes.draw do
     end
     member do
       get  'download'
-      post 'set_cover_photo'
+      get 'set_cover_photo'
     end
     end
    collection do
@@ -18,6 +18,13 @@ EdAlbum::Application.routes.draw do
    end
   end
   resources :users do
+    resources :emailer do
+    collection do
+     get 'mail'
+     post 'sendmail'
+     get 'admin'
+   end
+  end
     collection do
      post 'modify_password'
      get 'admin'
@@ -34,6 +41,8 @@ EdAlbum::Application.routes.draw do
       get 'home_page'
     end
   end
+
+  
 
   root :to => 'home#home_page'
 

@@ -3,9 +3,6 @@ class User < ActiveRecord::Base
 
   cattr_reader :page
   @@page = 5
- 
-
-
 
   has_many :albums
   has_many :comments
@@ -16,6 +13,4 @@ class User < ActiveRecord::Base
   def name
     first_name + ' ' + last_name
   end 
-
- 
 end

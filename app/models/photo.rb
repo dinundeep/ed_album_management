@@ -8,4 +8,5 @@ class Photo < ActiveRecord::Base
     album =  user.albums.find(:first,:conditions=>[" id = ? " ,self.album.id]) 
     album ? true : false 
   end
+
 end

@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
-
+layout :set_layout
   # GET /comments
   # GET /comments.json
-  layout 'employee_layout'
+#   layout 'employee_layout'
   def index
     @comments = Comment.all
     respond_to do |format|
@@ -16,9 +16,6 @@ class CommentsController < ApplicationController
   def show
     @comment = Comment.find(params[:id])
     @photo = Photo.find(params[:photo_id])
-#     @comment = @photo.comments
-    
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @comment }
@@ -29,7 +26,6 @@ class CommentsController < ApplicationController
   # GET /comments/new.json
   def new
       @album = Album.find(params[:album_id])
-#       @photo = Photo.find(params[:photo_id])
       @photo = @album.photos
       @comment = @photo.comments.build()
       respond_to do |format|
@@ -43,7 +39,6 @@ class CommentsController < ApplicationController
     @album = Album.find(params[:album_id])
     @photo = @album.photos
     @comment = Comment.find(params[:id])
-    
   end
 
   # POST /comments

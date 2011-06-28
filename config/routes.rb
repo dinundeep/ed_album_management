@@ -35,6 +35,14 @@ EdAlbum::Application.routes.draw do
     end
   end
 
+  resources :emailer do
+    collection do
+     get 'mail'
+     post 'sendmail'
+     get 'admin'
+   end
+  end 
+
   root :to => 'home#home_page'
 
   # Keep in mind you can assign values other than :controller and :action

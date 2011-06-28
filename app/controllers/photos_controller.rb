@@ -1,8 +1,9 @@
 class PhotosController < ApplicationController
-
+before_filter :require_user
+layout :set_layout
   # GET /photos
   # GET /photos.json
-  layout 'employee_layout'
+#   layout 'employee_layout'
   def index
     @album = Album.find(params[:album_id])
     @photos = @album.photos
@@ -18,7 +19,6 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @comments = @photo.comments
     @user = User.all
-    #@photo = Photo.all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @photo }
@@ -34,7 +34,6 @@ class PhotosController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @photo }
     end
-    
   end
 
   # GET /photos/1/edit
@@ -47,7 +46,10 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @album = Album.find(params[:album_id])
-    @photo = @album.photos.build(params[:photo])
+    params[:photo][:image].each do | image | 
+      @photo = @album.photos.build(:image => image)
+      @photo.save
+    end
     respond_to do |format|
       if @photo.save
         format.html { redirect_to album_photo_path(@album,@photo), notice: 'Photo was successfully uploaded.' }
@@ -79,14 +81,10 @@ class PhotosController < ApplicationController
   # DELETE /photos/1.json
   def destroy
     @photo = Photo.find(params[:id])
-    @album = current_user.albums.find(@photo.album.id)
-    unless @album
-      flash[:notice] = "You can not delete this photo" 
-      redirect_to album_photos_path and return
-    end
+    @album = @photo.album
     @photo.destroy
     respond_to do |format|
-      format.html { redirect_to album_photos_url(album) }
+      format.html { redirect_to album_photos_url }
       format.json { head :ok }
     end
   end
@@ -104,9 +102,9 @@ class PhotosController < ApplicationController
 
   def set_cover_photo
     @photo = Photo.find(params[:id])
-     @album = @photo.album
-     @album.cover_photo_id = @photo.id
-      @album.save
+    @album = @photo.album
+    @album.cover_photo_id = @photo.id
+    @album.save
     redirect_to my_albums_albums_path
  end
 end

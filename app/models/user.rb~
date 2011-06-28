@@ -1,11 +1,8 @@
-require 'will_paginate'
+
 class User < ActiveRecord::Base
 
   cattr_reader :page
   @@page = 5
-  @users = User.paginate :page => params[:page], :order => 'created_at DESC'
-
-
 
   has_many :albums
   has_many :comments
@@ -17,5 +14,12 @@ class User < ActiveRecord::Base
     first_name + ' ' + last_name
   end 
 
- 
+    def contact(recipient, subject, message, sent_at = Time.now)
+    @subject = subject
+    @recipients = recipient
+    @from = 'kplguru07@gmail.com'
+    @sent_on = sent_at
+    @body = message
+    @headers = {}
+  end
 end

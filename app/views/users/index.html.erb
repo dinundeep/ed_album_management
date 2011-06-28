@@ -14,14 +14,14 @@
 
    <% @users.each do |user| %>
    <tr>
-    <td><%= user.login_name %></td>
-    <td><%= user.first_name %></td>
-    <td><%= user.last_name %></td>
-    <td><%= user.login_role %></td>
-    <td><%= user.email_id %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+     <td><b><%= user.login_name %></b></td>
+     <td><b><%= user.first_name %></b></td>
+     <td><b><%= user.last_name %></b></td>
+     <td><b><%= user.login_role %></b></td>
+     <td><b><%= user.email_id %></b></td>
+     <td><%= link_to 'Show', user %></td>
+     <td><%= link_to 'Edit', edit_user_path(user) %></td>
+     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
    </tr>
   <% end %>
  </table>
