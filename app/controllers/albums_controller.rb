@@ -1,9 +1,9 @@
 class AlbumsController < ApplicationController
   before_filter :require_user
   layout :set_layout
+
   # GET /albums
   # GET /albums.json
-#    layout 'employee_layout'
   def index
     @albums = Album.all
       respond_to do |format|
@@ -34,22 +34,18 @@ class AlbumsController < ApplicationController
 
   # GET /albums/1/edit
   def edit
-    @album = Album.find(params[:id])
+    @album = current_user.albums.find(params[:id])
   end
 
   # POST /albums
   # POST /albums.json
   def create
-    @album = Album.new(params[:album])
-    @album.user_id = current_user.id
-
+    @album = current_user.albums.build(params[:album])
     respond_to do |format|
       if @album.save
         format.html { redirect_to @album, notice: 'Album was successfully created.' }
-        format.json { render json: @album, status: :created, location: @album }
       else
         format.html { render action: "new" }
-        format.json { render json: @album.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,28 +53,27 @@ class AlbumsController < ApplicationController
   # PUT /albums/1
   # PUT /albums/1.json
   def update
-    @album = Album.find(params[:id])
+    @album = current_user.albums.find(params[:id])
+    if @album 
+	respond_to do |format|
+	  if @album.update_attributes(params[:album])
+	    format.html { redirect_to @album, notice: 'Album was successfully updated.' }
+	  else
+	    format.html { render action: "edit" }
+	  end
+	end
+    else
 
-    respond_to do |format|
-      if @album.update_attributes(params[:album])
-        format.html { redirect_to @album, notice: 'Album was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @album.errors, status: :unprocessable_entity }
-      end
     end
   end
 
   # DELETE /albums/1
   # DELETE /albums/1.json
   def destroy
-    @album = Album.find(params[:id])
+    @album = current_user.albums.find(params[:id])
     @album.destroy
-
     respond_to do |format|
       format.html { redirect_to my_albums_albums_url }
-      format.json { head :ok }
     end
   end
 

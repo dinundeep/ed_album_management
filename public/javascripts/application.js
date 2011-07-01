@@ -35,15 +35,31 @@ function show_comment(show)
     document.getElementById(show).style.display = 'none'; 
   }
 }
-      var upload_number = 2;
-      function addFileInput() 
-       {
- 	var d = document.createElement("div");
- 	var file = document.createElement("input");
- 	file.setAttribute("type", "file");
- 	file.setAttribute("name", "photo[image][]");
- 	d.appendChild(file);
- 	document.getElementById("moreUploads").appendChild(d);
- 	upload_number++;
-       }
+ var upload_number = 2;
+ function addFileInput() 
+   {
+     var d = document.createElement("div");
+     var file = document.createElement("input");
+     file.setAttribute("type", "file");
+     file.setAttribute("name", "photo[image][]");
+     d.appendChild(file);
+     document.getElementById("moreUploads").appendChild(d);
+     upload_number++;
+   }
+ function validate_email()
+ {
+   var x=document.forms.user.mail.value;
+   var atpos=x.indexOf("@");
+   var dotpos=x.lastIndexOf(".");
+   if(x=="")
+   {
+    alert("Email id should not be blank");
+    return false;
+   }
+   if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+   {
+     alert("Not a valid e-mail address");
+     return false;
+   }
+ }
 

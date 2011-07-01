@@ -1,4 +1,5 @@
 <%= render :partial =>'home/marquee',:locals=>{:message =>'EMPLOYEE INFORMATION'} %>
+<%= notice %>
 <center>
  <table border="2">
   <tr>
@@ -14,14 +15,14 @@
 
    <% @users.each do |user| %>
    <tr>
-    <td><b><%= user.login_name %></b></td>
-    <td><b><%= user.first_name %></b></td>
-    <td><b><%= user.last_name %></b></td>
-    <td><b><%= user.login_role %></b></td>
-    <td><b><%= user.email_id %></b></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+     <td><b><%= user.login_name %></b></td>
+     <td><b><%= user.first_name %></b></td>
+     <td><b><%= user.last_name %></b></td>
+     <td><b><%= user.login_role %></b></td>
+     <td><b><%= user.email_id %></b></td>
+     <td><%= link_to 'Show', user %></td>
+     <td><%= link_to 'Edit', edit_user_path(user) %></td>
+     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
    </tr>
   <% end %>
  </table>

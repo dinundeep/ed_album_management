@@ -3,9 +3,9 @@
     <div id="error_explanation">
       <h2><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h2>
       <ul>
-      <% @album.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+	<% @album.errors.full_messages.each do |msg| %>
+	  <li><%= msg %></li>
+	<% end %>
       </ul>
     </div>
   <% end %>

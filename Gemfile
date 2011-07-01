@@ -14,7 +14,7 @@ gem "paperclip", "~> 2.3"
 gem 'will_paginate', '~>2.3.15'
 gem 'jquery-rails'
 gem 'ruby-debug19'
-
+gem 'activesupport', '~>3.1.0.rc1'
 # Use unicorn as the web server
 # gem 'unicorn'
 

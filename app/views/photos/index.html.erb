@@ -1,7 +1,11 @@
 <center>  
 <div class="row">
-<center><h2>Photo from <%= @photos.first.album.album_name %> album</h2></center>
- <% @photos.each do |photo| %>
+  <% if @photos.first %>
+     <center><h2>Photo from <%= @photos.first.album.album_name %> album</h2></center>
+  <% else %>
+    <center><h2>Album is empty</h2></center>
+  <% end %>
+     <% @photos.each do |photo| %>
     <div class="col1">
        <%= link_to image_tag(photo.image.url(:original), :height => "200" , :width => "200") , album_photo_path(photo.album,photo) %>
        <div class="cover">

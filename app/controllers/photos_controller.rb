@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
-before_filter :require_user
-layout :set_layout
+  before_filter :require_user
+  layout :set_layout
   # GET /photos
   # GET /photos.json
 #   layout 'employee_layout'
@@ -28,7 +28,7 @@ layout :set_layout
   # GET /photos/new
   # GET /photos/new.json
   def new
-    @album = current_user.albums.find(params[:album_id])
+    @album = Album.find(params[:album_id])
     @photo = @album.photos.build()
     respond_to do |format|
       format.html # new.html.erb

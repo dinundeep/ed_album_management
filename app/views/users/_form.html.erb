@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, :html => {:id => 'user', :name => 'user_form', :onsubmit => "return validate_email();"}) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -33,12 +33,12 @@
       </tr>
       <tr>
         <div class="field">
-           <td><b><%= f.label :login_role %></b></td><td><%= f.text_field :login_role %></td>
+           <td><b><%= f.label :login_role %></b></td><td><%= f.text_field :login_role %>
         </div>
         </tr>
       <tr>
         <div class="field">
-           <td><b><%= f.label :email_id %></b></td><td><%= f.text_field :email_id %></td>
+           <td><b><%= f.label :email_id %></b></td><td><%= f.text_field :email_id, :id =>'mail' %></td>
         </div>
       </tr>
       <tr><td></td><td></td></tr>

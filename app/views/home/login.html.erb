@@ -1,5 +1,5 @@
 <%= render :partial =>'home/marquee',:locals=>{:message =>'LOGIN PAGE'} %>
-<p id="notice"><%= notice %></p>
+<p id="notice"><center><h2><font color="red"><%= notice %></font></h2></center></p>
 <form method="post" action="/home/check_login" name="login_form" onsubmit="return validateForm()">
    <center>  
    <table>

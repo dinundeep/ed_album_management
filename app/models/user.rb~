@@ -7,19 +7,11 @@ class User < ActiveRecord::Base
   has_many :albums
   has_many :comments
   has_many :photos, :through => :comments
-  validates_presence_of :login_name, :login_password, :first_name, :last_name, :login_role, :email_id
+  validates_presence_of :login_name, :login_password, :first_name, :last_name, :login_role,:email_id
   validates_uniqueness_of :login_name
 
   def name
     first_name + ' ' + last_name
   end 
 
-    def contact(recipient, subject, message, sent_at = Time.now)
-    @subject = subject
-    @recipients = recipient
-    @from = 'kplguru07@gmail.com'
-    @sent_on = sent_at
-    @body = message
-    @headers = {}
-  end
 end

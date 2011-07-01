@@ -11,44 +11,51 @@ class UsersController < ApplicationController
   end
 
   def employee
-   render :layout => "employee_layout"
+
   end
 
   def change_password
-     if current_user.login_role == 'employee'
-       render :layout => "employee_layout"
-     else
-       render :layout => "admin_layout"
-     end
+
   end
 
   def index
-   @users = User.all
-   @users = @users.paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
+   if current_user.login_role.to_s.downcase == 'admin'
+    @users = User.all.paginate(:page => params[:page], :per_page => 10)
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @users }
+      end
+   else
+     redirect_to logout_home_index_path
+   end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
-      respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @user }
-      end
+   if current_user.login_role.to_s.downcase == 'admin'
+     @user = User.find(params[:id])
+       respond_to do |format|
+       format.html # show.html.erb
+       format.json { render json: @user }
+     end
+   else
+     redirect_to logout_home_index_path
+   end
   end
 
   # GET /users/new
   # GET /users/new.json
   def new
-    @user = User.new
-      respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-      end
+    if current_user.login_role.to_s.downcase == 'admin'
+      @user = User.new
+        respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @user }
+       end
+    else 
+      redirect_to logout_home_index_path
+    end
   end
 
   # GET /users/1/edit
@@ -58,25 +65,22 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
-  
   def create
     @user = User.new(params[:user])
-    respond_to do |format|
-      @user.login_password = get_encryp_pass(@user.login_password)
-      if @user.save
+      respond_to do |format|
+       @user.login_password = get_encryp_pass(@user.login_password)
+       if @user.save
         format.html { redirect_to :controller =>'users',:action => 'admin', notice: 'User was successfully created.' }
-      else
-        @user.login_password = nil
-        format.html { render action: "new" }
-      end
+        else
+         @user.login_password = nil
+         format.html { render action: "new" }
+       end
     end
   end
-  
   # PUT /users/1
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -89,22 +93,26 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    if current_user.login_role.to_s.downcase == 'admin'
     @user = User.find(params[:id])
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :ok }
     end
+    else
+       redirect_to logout_home_index_path
+    end
   end
  
   def modify_password
     current_password = get_encryp_pass(params[:current_password])
     new_password = get_encryp_pass(params[:new_password])
-    @user = User.find(:first,:conditions=>[" login_password = ? and id = ? ",current_password, current_user.id])
+    @user = User.find(:first, :conditions=>[" login_password = ? and id = ? ", current_password, current_user.id])
       if @user then
         @user.login_password = new_password
         @user.save
-        if current_user.login_role == 'Admin'
+        if current_user.login_role.to_s.downcase == 'admin'
            redirect_to :action => 'admin'
         else
            redirect_to :action => 'employee'

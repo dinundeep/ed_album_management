@@ -1,7 +1,8 @@
 <%= render :partial =>'home/marquee',:locals=>{:message =>'LOGIN PAGE'} %>
-<p id="notice"><%= notice %></p>
+<p id="notice"><font color="red"><%= notice %></font></p>
 <form method="post" action="/home/check_login" name="login_form" onsubmit="return validateForm()">
-    <table>
+   <center>  
+   <table>
       <tr>
 	  <td><b>LOGIN NAME</b></td><td><input id="login" type="text" name="login" /></td>
       </tr>
@@ -11,7 +12,8 @@
       <tr>
 	  <td></td><td><b><input type="submit" value="Login" /></b></td>
       </tr>
-  </table><br>
+   </table><br>
+  </center>
 </form>
 
 
